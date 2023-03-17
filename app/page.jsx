@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <main>
       {data && (
-        <ul>
+        <div className="grid gap-16 grid-cols-fluid">
           {data.results.map((movie) => (
             <Movie 
             key={movie.id}
@@ -32,7 +32,7 @@ export default function Home() {
             release_date={movie.release_date}
             />
           ))}
-        </ul>
+        </div>
       )}
     </main>
   );
