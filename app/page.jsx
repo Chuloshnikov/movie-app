@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react";
+import Movie from "./Movie";
 
 export default function Home() {
   const [data, setData] = useState(null);
@@ -23,7 +24,13 @@ export default function Home() {
       {data && (
         <ul>
           {data.results.map((movie) => (
-            <li key={movie.id}>{movie.title}</li>
+            <Movie 
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            poster_path={movie.poster_path}
+            release_date={movie.release_date}
+            />
           ))}
         </ul>
       )}
