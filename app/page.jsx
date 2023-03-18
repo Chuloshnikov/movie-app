@@ -1,39 +1,23 @@
-"use client"
+import Movie from "./Movie"
 
-import { useState, useEffect } from "react";
-import Movie from "./Movie";
-
-export default function Home() {
-  const [data, setData] = useState(null);
-  const API_KEY="64d6e48eb0f228948a0484363da88192"
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
-      );
-      const data = await response.json();
-      setData(data);
-    };
-
-    fetchData();
-  }, []);
-
+export default async function Home() {
+  const data = await fetch(
+    `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_KEY}`
+  )
+  const res = await data.json()
   return (
     <main>
-      {data && (
-        <div className="grid gap-16 grid-cols-fluid">
-          {data.results.map((movie) => (
-            <Movie 
+      <div className="grid grid-cols-fluid gap-16">
+        {res.results.map((movie) => (
+          <Movie
             key={movie.id}
             id={movie.id}
             title={movie.title}
             poster_path={movie.poster_path}
             release_date={movie.release_date}
-            />
-          ))}
-        </div>
-      )}
+          />
+        ))}
+      </div>
     </main>
-  );
+  )
 }
